@@ -3,7 +3,7 @@ import Auth from './pages/Auth';
 import Basket from './pages/Basket';
 import DevicePage from './pages/DevicePage';
 import Shop from './pages/Shop';
-import {ADMIN_ROUTE,BASKET_ROUTE,DEVICE_ROUTE,SHOP_ROUTE,AUTH_ROUTE, REGISTRATION_ROUTE} from './utils/consts'
+import {ADMIN_ROUTE,BASKET_ROUTE,DEVICE_ROUTE,SHOP_ROUTE,AUTH_ROUTE, REGISTRATION_ROUTE, LOGIN_ROUTE} from './utils/consts'
 
 export const authRoutes = [
     {
@@ -32,5 +32,9 @@ export const publicRoutes =[
     {
         path: DEVICE_ROUTE + '/:id',
         Component: DevicePage
-    }
+    },
+    {
+        path: LOGIN_ROUTE,
+        Component: Auth
+    },
 ];
