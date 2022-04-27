@@ -7,7 +7,7 @@ const CreateDevice = ({show,onHide}) => {
     const [info,setInfo] = useState([]);
 
     const addInfo = ()=>{
-        setInfo([...info],{title:'',description:'',number: Date.now()})
+        setInfo([...info,{title:'',description:'',number: Date.now()}])
     }
 
     const removeInfo = (number)=>{
@@ -18,7 +18,6 @@ const CreateDevice = ({show,onHide}) => {
     <Modal
     show={show}
     onHide={onHide}
-    size="lg"
     centered
 >
     <Modal.Header closeButton>
@@ -47,8 +46,8 @@ const CreateDevice = ({show,onHide}) => {
                         )}
                     </Dropdown.Menu>
                 </Dropdown>
-                <Form.Control className='mt-3' phaceholder={"Enter name of device"} />
-                <Form.Control className='mt-3' phaceholder={"Enter price"} type="number" />
+                <Form.Control className='mt-3' placeholder={"device name"} />
+                <Form.Control className='mt-3' placeholder={"price"} type="number" />
                 <Form.Control className='mt-3' type="file" />
                 <hr/>
                 <Button
@@ -59,10 +58,10 @@ const CreateDevice = ({show,onHide}) => {
                 {info.map(i =>
                     <Row className="mt-4">
                         <Col md={4}>
-                            <Form.Control placeholder='Enter name of property' />
+                            <Form.Control placeholder='property name' />
                         </Col>
                         <Col md={4}>
-                            <Form.Control placeholder='Enter description of property' />
+                            <Form.Control placeholder='description' />
                         </Col>
                         <Col md={4}>
                             <Button 

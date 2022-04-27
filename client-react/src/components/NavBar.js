@@ -9,6 +9,7 @@ const NavBar = () => {
     const navigate = useNavigate();
     const user = useSelector(state => state.user);
     const dispath = useDispatch();
+
     return (
         <Navbar bg="dark" variant="dark" >
             <Container>

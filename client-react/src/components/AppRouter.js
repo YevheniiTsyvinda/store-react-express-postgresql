@@ -5,7 +5,6 @@ import { useSelector } from 'react-redux'
 
 const AppRouter = () => {
     const isAuth = useSelector((state) => state.user.isAuth);
-    console.log(publicRoutes)
 
     return (
         <Routes>

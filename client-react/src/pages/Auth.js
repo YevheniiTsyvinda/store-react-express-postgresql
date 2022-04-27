@@ -1,13 +1,36 @@
 import React, { useState } from 'react'
 import { Container, Form, Card, Button, Row } from 'react-bootstrap'
-import { NavLink, useLocation } from 'react-router-dom'
-import { LOGIN_ROUTE, REGISTRATION_ROUTE } from '../utils/consts'
+import { NavLink, useLocation, useNavigate } from 'react-router-dom'
+import { LOGIN_ROUTE, REGISTRATION_ROUTE, SHOP_ROUTE } from '../utils/consts'
+import { registration, login } from '../http/userAPI';
+import { setUser, setIsAuth } from '../store/reducers/userReducer';
+import { useSelector, useDispatch } from 'react-redux';
 
 const Auth = () => {
     const location = useLocation();
+    const navigate = useNavigate();
     const isLogin = location.pathname === LOGIN_ROUTE;
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+
+    const dispatch = useDispatch();
+
+    const click = async () => {
+        try {
+            let response = {};
+            if (isLogin) {
+                response = await login(email,password);
+            } else {
+                response = await registration(email,password);
+            }
+            dispatch(setUser(response));
+            dispatch(setIsAuth(true));
+            navigate(SHOP_ROUTE);
+        } catch (e) {
+            alert(e.response.data.message)
+        }
+        
+    }
 
     return (
         <Container
@@ -21,11 +44,14 @@ const Auth = () => {
                         value={email}
                         onChange={e => setEmail(e.target.value)}
                         placeholder="Enter your email"
+                        autoComplete ="username"
                     />
                     <Form.Control className="mt-3"
                         value={password}
                         onChange={e => setPassword(e.target.value)}
                         placeholder="Enter password"
+                        type="password"
+                        autoComplete ="new-password"
                     />
                     <Row className="d-flex justify-content-between mt-3 pl-3 pr-3">
                         {isLogin ?
@@ -38,7 +64,11 @@ const Auth = () => {
                             </div>
                         }
 
-                        <Button className="mt-3 align-self-end" variant={"outline-success"}>
+                        <Button 
+                            className="mt-3 align-self-end" 
+                            variant={"outline-success"}
+                            onClick={click}
+                            >
                             {isLogin ? 'Enter' : 'Registration'}
                         </Button>
                     </Row>
