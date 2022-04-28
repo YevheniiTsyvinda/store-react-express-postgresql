@@ -1,26 +1,23 @@
-import React from 'react'
+import React,{useState, useEffect} from 'react'
 import { Card, Col, Row, Container, Image, Button } from 'react-bootstrap'
 import bigStar from '../assets/bigStar.png'
+import { useParams } from 'react-router-dom'
+import { fetchOneDevice } from '../http/deviceAPI'
 
 const DevicePage = () => {
-    const device = {
-        id: 1, name: 'Iphone 12 Pro', price: 40000, rating: 5,
-        img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTzXy4VHsrLyVPWDiqgF73cjLvMQP4LoTWDo_BbqxOBQzIsY-dc8lO5DYAO_VVXC0IKczg&usqp=CAU'
-    };
-    const description =[
-        {id:1,title:'Ram',description: '5 gb'},
-        {id:2,title:'Ram',description: '5 gb'},
-        {id:3,title:'Ram',description: '5 gb'},
-        {id:4,title:'Ram',description: '5 gb'},
-        {id:5,title:'Ram',description: '5 gb'},
-    ]
 
+    const [device, setDevice] = useState({info: []});
+    const {id} = useParams();
+
+    useEffect(()=>{
+        fetchOneDevice(id).then(data => setDevice(data))
+    },[])
 
     return (
         <Container className='mt-3'>
             <Row>
                 <Col md={4}>
-                    <Image width={300} height={300} src={device.img} />
+                    <Image width={300} height={300} src={ProcessingInstruction.env.REACT_APP_API_URL +device.img} />
                 </Col>
                 <Col md={4}>
                     <Row className='d-flex align-items-center'>
@@ -49,10 +46,11 @@ const DevicePage = () => {
             </Row>
             <Row>
                 <h1>Characteristics</h1>
-                {description.map((info,index)=>
-                    <Row key={info.id} style={{background: index % 2 === 0 ? 'lightgray':'transparent',
+                {device.info.map((info,index)=>
+                    <Row key={info.id} 
+                        style={{background: index % 2 === 0 ? 'lightgray':'transparent',
                         padding:10}}>
-
+                            {info.title}: {info.description}
                     </Row>
                 )}
             </Row>

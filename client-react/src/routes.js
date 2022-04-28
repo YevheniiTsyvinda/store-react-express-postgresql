@@ -36,5 +36,5 @@ export const publicRoutes =[
     {
         path: LOGIN_ROUTE,
         Component: Auth
-    },
+    }
 ];

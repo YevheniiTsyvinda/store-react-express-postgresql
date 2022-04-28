@@ -9,12 +9,14 @@ import { check } from './http/userAPI';
 
 const App = () => {
     const [loading, setLoading] = useState(true);
-
     useEffect(()=>{
         check().then(data => {
-            setUser(true);
+            setUser(data);
             setIsAuth(true);
-        }).finaly(()=> setLoading(false));
+        }).finally(()=> {
+            console.log('fin')
+            setLoading(false)
+        });
     },[]);
     
 
