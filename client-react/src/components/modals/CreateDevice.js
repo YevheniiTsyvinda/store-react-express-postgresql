@@ -60,9 +60,6 @@ const CreateDevice = ({show,onHide}) => {
     </Modal.Header>
     <Modal.Body>
         <Form>
-            <Form.Control
-                placeholder={"Enter name of device"}
-            />
             <Dropdown className="mt-2 mb-2">
                     <Dropdown.Toggle>{ device.selectedType.name||"Sellect type"}</Dropdown.Toggle>
                     <Dropdown.Menu>
@@ -79,7 +76,7 @@ const CreateDevice = ({show,onHide}) => {
                     <Dropdown.Menu>
                         {device.brands.map(brand =>
                         <Dropdown.Item 
-                        onClick={()=> setSelectedBrand(brand)}
+                        onClick={()=> dispatch(setSelectedBrand(brand))}
                         key={brand.id}
                         >
                             {brand.name}
@@ -105,7 +102,7 @@ const CreateDevice = ({show,onHide}) => {
                 <Button
                     variant='outline-dark'
                     onClick={addInfo}
-                >Add new device
+                >Add a new feature
                 </Button>
                 {info.map(i =>
                     <Row className="mt-4" key={i.number}>

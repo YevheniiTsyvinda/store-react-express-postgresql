@@ -16,8 +16,8 @@ const authInterceptor = config => {
 $authHost.interceptors.request.use(authInterceptor);
 
 const errorHandler = (response)=>{
-console.log(response)
-return response;
+console.log({error :response})
+return null;
 }
 
 $authHost.interceptors.response.use(errorHandler);

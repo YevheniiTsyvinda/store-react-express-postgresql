@@ -10,13 +10,18 @@ import { check } from './http/userAPI';
 const App = () => {
     const [loading, setLoading] = useState(true);
     useEffect(()=>{
-        check().then(data => {
-            setUser(data);
-            setIsAuth(true);
-        }).finally(()=> {
-            console.log('fin')
-            setLoading(false)
-        });
+        if(localStorage.getItem('token')){
+            check().then(data => {
+                setUser(data);
+                setIsAuth(true);
+            }).catch(e =>{
+                console.log(e);
+            }).finally(()=> {
+                setLoading(false)
+            });
+        }
+        setLoading(false)
+        
     },[]);
     
 

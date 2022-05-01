@@ -14,12 +14,15 @@ export const deviceSlice = createSlice({
     },
     reducers:{
         setTypes:(state,action)=>{
+            setPage(1);
             state.types = action.payload;
         },
         setSelectedType: (state,action) =>{
+            setPage(1);
             state.selectedType = action.payload;
         },
         setSelectedBrand: (state,action) =>{
+            console.log({payload: action.payload})
             state.selectedBrand = action.payload;
         },
         setBrands:(state,action)=>{
@@ -30,7 +33,13 @@ export const deviceSlice = createSlice({
         },
         setTotalCount:(state, action) =>{
             state.totalCount = action.payload;
-        }
+        },
+        setLimit:(state, action) =>{
+            state.limit = action.payload;
+        },
+        setPage:(state, action) =>{
+            state.page = action.payload;
+        },
     }
 });
 
@@ -41,5 +50,7 @@ export const {
     setSelectedType,
     setSelectedBrand,
     setTotalCount,
+    setLimit,
+    setPage
 } = deviceSlice.actions;
 export default deviceSlice.reducer;

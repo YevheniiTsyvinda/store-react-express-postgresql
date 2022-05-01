@@ -6,6 +6,7 @@ import TypeBar from '../components/TypeBar'
 import { useSelector, useDispatch } from 'react-redux'
 import { fetchBrands, fetchDevices, fetchTypes } from '../http/deviceAPI';
 import { setBrands, setTypes, setDevices, setTotalCount } from '../store/reducers/deviceReducer'
+import Pages from '../components/Pages'
 
 const Shop = () => {
     const device = useSelector(state => state.device);
@@ -36,6 +37,7 @@ const Shop = () => {
                 <Col md={9}>
                     <BrandBar />
                     <DeviceList/>
+                    <Pages />
                 </Col>
             </Row>
         </Container>
