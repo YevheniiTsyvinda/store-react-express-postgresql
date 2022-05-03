@@ -3,6 +3,7 @@ import { Card, Col, Row, Container, Image, Button } from 'react-bootstrap'
 import bigStar from '../assets/bigStar.png'
 import { useParams } from 'react-router-dom'
 import { fetchOneDevice } from '../http/deviceAPI'
+import {addToBasket} from '../http/basketAPI' 
 
 const DevicePage = () => {
 
@@ -13,11 +14,15 @@ const DevicePage = () => {
         fetchOneDevice(id).then(data => setDevice(data))
     },[])
 
+    const addDeviceToBasket= ()=>{
+        addToBasket(id).then(data => {console.log(data)})
+    };
+
     return (
         <Container className='mt-3'>
             <Row>
                 <Col md={4}>
-                    <Image width={300} height={300} src={process.env.REACT_APP_API_URL +device.img} />
+                    <Image width={300} height={300} src={device?.id && process.env.REACT_APP_API_URL + device?.img} />
                 </Col>
                 <Col md={4}>
                     <Row className='d-flex align-items-center'>
@@ -39,7 +44,10 @@ const DevicePage = () => {
                         style={{width: 300, height: 300, fontSize:32,border:'5px solid lightgray'}}
                     >
                         <h3>{device.price}</h3>
-                        <Button variant={"outline-dark"}>Add to Basket</Button>
+                        <Button 
+                            variant={"outline-dark"}
+                            onClick={()=> addDeviceToBasket()}
+                        >Add to Basket</Button>
                     </Card>
                 </Col>
 
